@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MyStore.Application.Model;
 
 namespace MyStore.Application.Repositories
 {
     public interface IProductRepository
     {
+        Task<IList<Product>> FindAll();
     }
 }

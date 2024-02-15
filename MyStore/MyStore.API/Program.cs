@@ -1,4 +1,8 @@
+using FreeMarket.Integration;
+using MyStore.Application.Connectors;
+using MyStore.Application.Repositories;
 using MyStore.Application.Services;
+using MyStore.Persistence;
 
 public class Program
 {
@@ -14,7 +18,11 @@ public class Program
         services.AddScoped<IProductService, ProductService>();
 
         //repositories
-        //services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IProductRepository, ProductRepository>();
+
+        //connectors
+        services.AddScoped<IFreeMarketConnector, FreeMarketConnector>();
+        
         services.AddOpenApiDocument(document =>
         {
             document.PostProcess = (document) =>

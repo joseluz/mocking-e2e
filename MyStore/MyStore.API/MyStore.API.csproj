@@ -21,7 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FreeMarket.Integration\FreeMarket.Integration.csproj" />
     <ProjectReference Include="..\MyStore.Application\MyStore.Application.csproj" />
+    <ProjectReference Include="..\MyStore.Persistence\MyStore.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>
