@@ -1,33 +1,30 @@
-//using Microsoft.AspNetCore.Hosting;
-//using Microsoft.AspNetCore;
-
-//public class Program
-//{
-//    private static void Main(string[] args)
-//    {
-//        CreateWebHostBuilder(args)
-//            .Build()
-//            .Run();
-//    }
-
-//    private static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-//        WebHost.CreateDefaultBuilder(args)
-//               .UseStartup<Startup>();
-//}
+using MyStore.Application.Services;
 
 public class Program
 {
     private static void Main(string[] args)
     {
-
-
-
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddControllers();
-        builder.Services.AddEndpointsApiExplorer();
+        var services = builder.Services;
+        services.AddControllers();
+        services.AddEndpointsApiExplorer();
 
-        //builder.Services.AddSwaggerGen();
+        // services
+        services.AddScoped<IProductService, ProductService>();
+
+        //repositories
+        //services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddOpenApiDocument(document =>
+        {
+            document.PostProcess = (document) =>
+            {
+                document.OpenApi = "3.0.0";
+                document.Info.Version = "v1";
+                document.Info.Title = "MyStore API";
+                document.Info.Description = "MyStore Cool Description";
+            };
+        });
 
         var app = builder.Build();
         app.MapGet("/", () => "Hello World!");
@@ -39,6 +36,9 @@ public class Program
         }
 
         app.MapControllers();
+        app.UseDeveloperExceptionPage(); 
+        app.UseOpenApi();
+        app.UseSwaggerUi();
 
         app.Run();
     }
