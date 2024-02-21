@@ -10,4 +10,8 @@
     <ProjectReference Include="..\MyStore.Application\MyStore.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Documents\" />
+  </ItemGroup>
+
 </Project>

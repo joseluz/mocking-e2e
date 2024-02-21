@@ -1,0 +1,13 @@
+﻿services:
+  mongodb:
+    image: mongo:latest
+    environment:
+    - MONGO_INITDB_ROOT_USERNAME=admin
+    - MONGO_INITDB_ROOT_PASSWORD=doNotTellAnyone
+    ports:
+    - '27017:27017'
+
+  mongo-seed:
+    build: ./MongoSeed
+    depends_on:
+    - mongodb
