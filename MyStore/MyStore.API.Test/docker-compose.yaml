@@ -7,25 +7,8 @@
     - MONGO_INITDB_ROOT_PASSWORD=doNotTellAnyone
     ports:
     - '27017:27017'
-    networks:
-    - mongo-compose-network
     
   mongo-seed:
     build: ./MongoSeed
     depends_on:
     - mongodb
-    networks:
-    - mongo-compose-network
-
-  # mongo-express:
-  #   image: mongo-express
-  #   ports:
-  #   - 8081:8081
-  #   depends_on:
-  #   - mongodb
-  #   networks:
-  #   - mongo-compose-network
-
-networks: 
-    mongo-compose-network:
-      driver: bridge
