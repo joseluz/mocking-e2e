@@ -28,6 +28,11 @@ public class Program
 
         //connectors
         services.AddScoped<IFreeMarketConnector, FreeMarketConnector>();
+        var baseUrl = builder.Configuration["FreeMarketUrl"] ?? throw new ArgumentException("Missing FreeMarket service url");
+        services.AddHttpClient<IFreeMarketConnector, FreeMarketConnector>((client) =>
+        {
+            client.BaseAddress = new Uri(baseUrl);
+        });
 
         // Mongo setup
         var connectionString = builder.Configuration["MongoDB:ConnectionString"];

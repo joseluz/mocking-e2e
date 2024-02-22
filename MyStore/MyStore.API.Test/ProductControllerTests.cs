@@ -22,5 +22,13 @@ namespace MyStore.API.Test
                 .Should().NotBeNullOrEmpty()
                 .And.HaveCount(1);
         }
+
+        [Fact]
+        public async Task FindAllProducts_WithNoArgs_ShouldReturnAllProductsWithValues()
+        {
+            var products = await productsClient.FindAllAsync();
+            products.Should().NotBeEmpty();
+            products.All(p => p.CurrentValue > 0).Should().BeTrue();    
+        }
     }
 }
