@@ -7,11 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MyStore.Application\MyStore.Application.csproj" />
+    <PackageReference Include="MongoDB.Bson" Version="2.23.2" />
+    <PackageReference Include="MongoDB.Driver" Version="2.23.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Documents\" />
+    <ProjectReference Include="..\MyStore.Application\MyStore.Application.csproj" />
   </ItemGroup>
 
 </Project>

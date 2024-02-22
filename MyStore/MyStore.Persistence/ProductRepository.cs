@@ -15,19 +15,12 @@ namespace MyStore.Persistence
 
         public async Task<IList<Product>> FindAll()
         {
-            return new List<Product>()
+            var prods = await productDataStore.FindAll();
+            return prods.Select(p => new Product()
             {
-                new()
-                {
-                    Id="P1",
-                    Name="Product 1"
-                },
-                new()
-                {
-                    Id="P2",
-                    Name="Product 2"
-                }
-            };
+                Name = p.Name,
+                Id = p.Id.ToString(),
+            }).ToList();
         }
     }
 }

@@ -1,8 +1,11 @@
 using FreeMarket.Integration;
+using MongoDB.Driver;
 using MyStore.Application.Connectors;
 using MyStore.Application.Repositories;
 using MyStore.Application.Services;
 using MyStore.Persistence;
+using MyStore.Persistence.DataStore;
+using System.Security.Authentication;
 
 public class Program
 {
@@ -20,9 +23,23 @@ public class Program
         //repositories
         services.AddScoped<IProductRepository, ProductRepository>();
 
+        // datastores 
+        services.AddScoped<IProductDataStore, ProductDataStore>();
+
         //connectors
         services.AddScoped<IFreeMarketConnector, FreeMarketConnector>();
-        
+
+        // Mongo setup
+        var connectionString = builder.Configuration["MongoDB:ConnectionString"];
+        var databaseName = builder.Configuration["MongoDB:DatabaseName"];
+
+        var settings = MongoClientSettings.FromUrl(new MongoUrl(connectionString));
+        settings.SslSettings = new SslSettings() { EnabledSslProtocols = SslProtocols.Tls12 };
+        var mongoClient = new MongoClient(settings);
+        //services.AddSingleton<IMongoClient>(mongoClient);
+        var mongoDatabase = mongoClient.GetDatabase(databaseName);
+        services.AddSingleton(mongoDatabase);
+
         services.AddOpenApiDocument(document =>
         {
             document.PostProcess = (document) =>

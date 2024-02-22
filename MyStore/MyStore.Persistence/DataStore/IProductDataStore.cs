@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MyStore.Persistence.Documents;
 
 namespace MyStore.Persistence.DataStore
 {
     public interface IProductDataStore
     {
+        Task<IList<ProductDocument>> FindAll();
     }
 }
