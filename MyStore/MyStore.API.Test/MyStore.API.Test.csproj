@@ -31,7 +31,7 @@
 
   
   <ItemGroup>
-      <OpenApiReference Include="../MyStore.API/wwwroot/api/specification.json" Options="/UseBaseUrl:false /DateTimeType:System.DateTime" CodeGenerator="NSwagCSharp">
+      <OpenApiReference Include="../MyStore.API/OpenApi/api/specification.json" Options="/UseBaseUrl:false /DateTimeType:System.DateTime" CodeGenerator="NSwagCSharp">
           <SourceUrl>https://localhost:32772</SourceUrl>
           <ClassName>{controller}Client</ClassName>
       </OpenApiReference>

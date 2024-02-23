@@ -41,11 +41,11 @@ public class Program
         var settings = MongoClientSettings.FromUrl(new MongoUrl(connectionString));
         settings.SslSettings = new SslSettings() { EnabledSslProtocols = SslProtocols.Tls12 };
         var mongoClient = new MongoClient(settings);
-        //services.AddSingleton<IMongoClient>(mongoClient);
         var mongoDatabase = mongoClient.GetDatabase(databaseName);
         services.AddSingleton(mongoDatabase);
 
-        services.AddOpenApiDocument(document =>
+        // OpenApi 3.0
+        services.AddOpenApiDocument((document, provider) =>
         {
             document.PostProcess = (document) =>
             {
@@ -66,7 +66,7 @@ public class Program
         }
 
         app.MapControllers();
-        app.UseDeveloperExceptionPage(); 
+        app.UseDeveloperExceptionPage();
         app.UseOpenApi();
         app.UseSwaggerUi();
 
