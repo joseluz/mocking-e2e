@@ -22,6 +22,7 @@ namespace MyStore.API.Controllers
             var productResources = products.Select(p => new ProductResource()
             {
                 Id = p.Id,
+                Key = p.Key,
                 Name = p.Name,
                 CurrentValue = p.CurrentValue
             });

@@ -24,12 +24,17 @@ namespace MyStore.Application.Services
 
         private async Task EnrichProducts(IList<Product> products)
         {
-            var productIds = products.Select(s => s.Id);
+            var productIds = products.Select(s => s.Key);
             var productsPriceTable = (await freeMarketConnector.SearchPriceTableFor(productIds))
-                .ToDictionary(p => p.Id);
+                .Where(p => p.CurrentValue > 0)
+                .DistinctBy(p => p.Key)
+                .ToDictionary(p => p.Key);
             foreach (var product in products)
             {
-                product.CurrentValue = productsPriceTable[product.Id].CurrentValue;
+                if (productsPriceTable.TryGetValue(product.Key, out var productPriceItem))
+                {
+                    product.CurrentValue = productPriceItem.CurrentValue;
+                }
             }
         }
     }

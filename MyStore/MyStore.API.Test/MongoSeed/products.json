@@ -1,20 +1,26 @@
 ﻿[
   {
+    "Key": "p001",
     "Name": "Product 1"
   },
   {
+    "Key": "p002",
     "Name": "Product 2"
   },
   {
+    "Key": "p003",
     "Name": "Product 3"
   },
   {
+    "Key": "p004",
     "Name": "Product 4"
   },
   {
+    "Key": "p005",
     "Name": "Product 5"
   },
   {
+    "Key": "p006",
     "Name": "Product 6"
   }
 ]

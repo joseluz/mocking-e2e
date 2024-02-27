@@ -12,3 +12,9 @@
     build: ./MongoSeed
     depends_on:
     - mongodb
+
+  free-market-mockoon:
+    build: ./3rd Party/FreeMarket
+    ports:
+    - '3000:3000'
+    

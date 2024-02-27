@@ -19,6 +19,7 @@ namespace MyStore.Persistence
             return prods.Select(p => new Product()
             {
                 Name = p.Name,
+                Key = p.Key,
                 Id = p.Id.ToString(),
             }).ToList();
         }

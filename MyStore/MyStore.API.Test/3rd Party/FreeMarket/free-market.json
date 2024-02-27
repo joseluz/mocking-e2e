@@ -1,0 +1,107 @@
+{
+  "uuid": "f166289c-4dc3-4ed5-a80b-17c0a5303549",
+  "lastMigration": 32,
+  "name": "Free market",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3000,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "04b1ee06-15e7-4155-b37b-d4ebf321f2db",
+      "type": "http",
+      "documentation": "Finds PriceItem information for products",
+      "method": "get",
+      "endpoint": "products/:productId/price",
+      "responses": [
+        {
+          "uuid": "cd2c86f7-e704-40c5-aedd-6aabfadf21dc",
+          "body": "{\r\n  \"id\": \"{{urlParam 'productId'}}\",\r\n  \"price\": {{faker 'number.float' min=1 max=1500}}\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Get product price item example",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "6d65b1cf-1074-4603-a519-0b9d8b5a0d51",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "Not Found Product",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "productId",
+              "value": "p999",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "04b1ee06-15e7-4155-b37b-d4ebf321f2db"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}

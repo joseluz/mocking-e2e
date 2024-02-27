@@ -53,6 +53,7 @@ namespace MyStore.API.Test
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
+            dockerFixture.Dispose();
         }
     }
 }

@@ -159,6 +159,7 @@ export class ProductsClient implements IProductsClient {
 
 export class ProductResource implements IProductResource {
     id!: string;
+    key!: string;
     name!: string;
     currentValue!: number;
 
@@ -174,6 +175,7 @@ export class ProductResource implements IProductResource {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"] !== undefined ? _data["id"] : <any>null;
+            this.key = _data["key"] !== undefined ? _data["key"] : <any>null;
             this.name = _data["name"] !== undefined ? _data["name"] : <any>null;
             this.currentValue = _data["currentValue"] !== undefined ? _data["currentValue"] : <any>null;
         }
@@ -189,6 +191,7 @@ export class ProductResource implements IProductResource {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id !== undefined ? this.id : <any>null;
+        data["key"] = this.key !== undefined ? this.key : <any>null;
         data["name"] = this.name !== undefined ? this.name : <any>null;
         data["currentValue"] = this.currentValue !== undefined ? this.currentValue : <any>null;
         return data;
@@ -197,6 +200,7 @@ export class ProductResource implements IProductResource {
 
 export interface IProductResource {
     id: string;
+    key: string;
     name: string;
     currentValue: number;
 }

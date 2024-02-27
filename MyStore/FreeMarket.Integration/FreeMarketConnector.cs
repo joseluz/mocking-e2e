@@ -1,5 +1,7 @@
-﻿using MyStore.Application.Connectors;
+﻿using FreeMarket.Integration.Resources;
+using MyStore.Application.Connectors;
 using MyStore.Application.Model;
+using System.Net.Http.Json;
 
 namespace FreeMarket.Integration
 {
@@ -14,7 +16,25 @@ namespace FreeMarket.Integration
 
         public async Task<IEnumerable<ProductPriceItem>> SearchPriceTableFor(IEnumerable<string> keys)
         {
-            return keys.Select(k => new ProductPriceItem() { Id = k, CurrentValue = (decimal)Math.Round(new Random().NextDouble() * 200, 2) });
+            var priceItems = new List<ProductPriceItem>();
+            foreach (string key in keys.Order())
+            {
+                var url = $"/products/{key}/price";
+                try
+                {
+
+                    var item = await httpClient.GetFromJsonAsync<PriceItemResource>(url);
+                    if (item != null)
+                    {
+                        priceItems.Add(item.ToPriceItem());
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+            return priceItems;
         }
     }
 }

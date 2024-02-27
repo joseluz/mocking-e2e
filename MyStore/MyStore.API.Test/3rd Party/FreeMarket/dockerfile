@@ -1,0 +1,9 @@
+﻿FROM mockoon/cli:latest
+
+ENV MOCKOON_DATA_DIR=/data
+
+COPY free-market.json /data/free-market.json
+
+EXPOSE 3000
+
+CMD ["--data", "data/free-market.json", "--port", "3000"]
